@@ -1,0 +1,136 @@
+\documentclass[twocolumn,a4paper,11pt,draft]{article}
+\usepackage[czech]{babel}
+\usepackage[left=1.5cm,top=2.5cm,
+			textheight=25cm,textwidth=18cm]{geometry}
+\usepackage[IL2]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{microtype}
+\newtheorem{definition}{Definice}
+\newtheorem{theorem}{Věta}
+\theoremstyle{definition}
+
+
+\begin{document}
+	\label{chap}
+	\begin{titlepage}
+		\begin{center}	
+			\addtolength{\parskip}{0.4em}
+			{\Huge
+			\textsc{
+			Vysoké učení technické v Brně}}
+		
+			{\huge 
+			 \textsc{
+			 Fakulta informačních technologií}}
+		 
+			\vspace{\stretch{0.382}}
+			\addtolength{\parskip}{0.3em}
+			{\LARGE
+			Typografie a publikování\,--\,2. projekt
+			
+			Sazba dokumentů a matematických výrazů}
+
+			\vspace{\stretch{0.618}}
+		\end{center}
+		{\Large 
+		2022 \hfill Danil Domrachev (xdomra00)}
+	\end{titlepage}
+
+	\newpage
+	\label{p1}
+	\section*{Úvod}
+	
+	V této úloze si vyzkoušíme sazbu titulní strany, matematických vzorců, prostředí a dalších textových struktur obvyklých pro technicky zaměřené texty (například rovnice~(\ref{eq2}) nebo Definice \ref{def2} na straně \pageref{p1}). Pro vytvoření těchto odkazů používáme příkazy \verb!\label!, \verb!\ref! a \verb!\pageref!.
+	
+	Na titulní straně je využito sázení nadpisu podle optického středu s využitím zlatého řezu. Tento postup byl probírán na přednášce. Dále je na titulní straně použito odřádkování se zadanou relativní velikostí 0,4\,em a 0,3\,em.
+	
+	\section{Matematický text}
+	Nejprve se podíváme na sázení matematických symbolů a~výrazů v plynulém textu včetně sazby definic a vět s využitím balíku \texttt{amsthm}. Rovněž použijeme poznámku pod čarou s použitím příkazu \verb!\footnote!. Někdy je vhodné použít konstrukci \verb!${}$! nebo \verb!\mbox{}!, která říká, že (matematický) text nemá být zalomen.
+	
+	\begin{definition}
+		\label{def1}
+		\textnormal{Nedeterministický Turingův stroj}(NTS)\,je šestice tvaru $M=(Q,\Sigma,\Gamma,\delta,q_0,q_F)$, kde:
+		\begin{itemize}
+		 \item $Q$ je konečná množina \textnormal{vnitřních (řídicích) stavů},
+		 \item $\Sigma$ je konečná množina symbolů nazývaná \textnormal{vstupní abeceda}, $\Delta \notin \Sigma$,
+		 \item $\Gamma$ je konečná množina symbolů, $\Sigma \subset \Gamma$, $\Delta \in \Gamma$, nazývaná \textnormal{pásková abeceda},
+		 \item $\delta: (Q \setminus \{q_F\}) \times \Gamma \rightarrow 2^{Q \times (\Gamma \cup \{L,R\})}$, kde $L, R \notin \Gamma$, je parciální \textnormal{přechodová funkce,} a
+		 \item $q_0 \in Q$ je \textnormal{počáteční stav} a $q_F \in Q$ je \textnormal{koncový stav}.
+		\end{itemize}
+	\end{definition}
+
+	Symbol $\Delta$ značí tzv. \emph{blank} (prázdný symbol), který se vyskytuje na místech pásky, která nebyla ještě použita.
+
+	\emph{Konfigurace pásky} se skládá z nekonečného řetězce, který reprezentuje obsah pásky, a pozice hlavy na tomto řetězci. Jedná se o prvek množiny \mbox{$\{\gamma\Delta^{\omega}\ |\ \gamma \in \Gamma^*\} \times \mathbb{N}\footnotemark$.}\footnotetext{Pro libovolnou abecedu $\Sigma$ je $\Sigma^\omega$ množina všech \emph{nekonečných} řetězců nad $\Sigma$, tj. nekonečných posloupností symbolů ze $\Sigma$.}
+	\emph{Konfiguraci pásky} obvykle zapisujeme jako $\Delta xyz\underline{z}x\Delta$\,\ldots (podtržení značí pozici hlavy).
+	\emph{Konfigurace stroje} je pak dána stavem řízení a konfigurací pásky. Formálně se jedná o prvek množiny \mbox{$Q \times \{\gamma\Delta^{\omega}\ |\ \gamma \in \Gamma^*\} \times \mathbb{N}$.}
+
+	\subsection{Podsekce obsahující definici a větu}
+	\begin{definition}
+	\label{def2}
+	\textnormal{Řetězec} $w$ \textnormal{nad abecedou $\Sigma$ je přijat NTS} $M$, jestliže $M$ při aktivaci z počáteční konfigurace pásky $\underline{\Delta}w\Delta$\,\ldots a počátečního stavu $q_0$ může zastavit přechodem do koncového stavu $q_F$, tj. $(q_0,\Delta w \Delta^w, 0) \stackrel{*}{\underset{M}{\vdash}} (q_F, \gamma, n)$ pro nějaké $\gamma \in \Gamma^*$ a $n \in \mathbb{N}$.
+	
+	Množinu $L(M) = \{w\ |\ w$ je přijat NTS $M \} \subseteq \Sigma^*$ nazýváme \textnormal{jazyk přijímaný NTS} $M$
+	\end{definition}
+
+	Nyní si vyzkoušíme sazbu vět a důkazů opět s použitím balíku \verb!amsthm!.
+	
+	\begin{theorem}
+	Třída jazyků, které jsou přijímány NTS, odpovídá \textnormal{rekurzivně vyčíslitelným jazykům.}
+	\end{theorem}
+	
+	\section{Rovnice}
+	Složitější matematické formulace sázíme mimo plynulý text. Lze umístit několik výrazů na jeden řádek, ale pak je třeba tyto vhodně oddělit, například příkazem \verb!\quad!.
+	$$x^2-\sqrt[4]{y_1*y_{2}^{3}}\quad x > y_1 \ge y_2\quad z_{z_{z}} \neq \alpha_{1}^{\alpha_{2}^{\alpha_3}}$$
+	
+	V rovnici (\ref{eq1}) jsou využity tři typy závorek s různou explicitně definovanou velikostí.
+	
+	\begin{eqnarray}
+		\label{eq1}
+		x & = &\bigg\{ a \oplus \Big[ b \cdot \big(c \ominus d\big) \Big] \bigg\}^{4/2}\\
+		\label{eq2}
+		y & = &\underset{\beta \to \infty}{\lim} \ \frac{\tan^2\beta - \sin^3\beta}{\frac{1}{\frac{1}{\log_{42}x}+\frac{1}{2}}}
+	\end{eqnarray}
+	
+	V této větě vidíme, jak vypadá implicitní vysázení limity $\lim_{n \to \infty}\,f(x)$ v normálním odstavci textu. Podobně je to i s dalšími symboly jako $\bigcup_{N \in \mathcal{M}}N$ či $\sum^{n}_{j=0}x^{2}_j$
+	S vynucením méně úsporné sazby příkazem \verb!\limits! budou vzorce vysázeny v podobě $\lim\limits_{n\to\infty}f(n)$ a $\sum\limits_{j=0}^{n}x^{2}_j$.
+	
+	\section{Matice}
+	Pro sázení matic se velmi často používá prostředí \verb!array! a závorky (\verb!\left!, \verb!\right!).
+	
+	$$ \textbf{A} = \left|
+	\begin{array}{cccc}
+		a_{11} & a_{12} & \ldots & a_{1n}\\
+		a_{21} & a_{22} & \ldots & a_{2n}\\
+		\vdots & \vdots & \ddots & \vdots\\
+		a_{m1} & a_{m2} & \ldots & a_{mn}\\
+	\end{array} \right| = 
+	\left|
+	\begin{array}{cc}
+		t & u\\
+		v & w
+	\end{array} \right| = 	tw - uv
+	$$
+	
+	Prostředí \verb!array! lze úspěšně využít i jinde.
+	
+	$$
+	\left(\!\!\!
+	\begin{array}{c}
+		n\\k	
+	\end{array}\!\!\!
+	\right) = 
+	\left\{
+	\begin{array}{cl}
+		\frac{n!}{k!(n-k)!} & \text{pro} \ 0 \leq k \leq n \\
+		0 & \text{pro}  \ k > n\  \text{nebo}\ k < 0	
+	\end{array}
+	\right.
+	$$
+	
+	
+\end{document}
